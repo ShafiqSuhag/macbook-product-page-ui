@@ -43,11 +43,15 @@ variationMemory8gb.addEventListener('click',function(){
     totalPriceCalculation();
 })
 variationMemory16gb.addEventListener('click',function(){
-    memoryCost.innerText = 100;
+    memoryCost.innerText = 180;
     totalPriceCalculation();
 })
 
 // storage variations event handler
+variationStorage256gb.addEventListener('click',function(){
+    storageCost.innerText = 0;
+    totalPriceCalculation();
+})
 variationStorage512gb.addEventListener('click',function(){
     storageCost.innerText = 100;
     totalPriceCalculation();
