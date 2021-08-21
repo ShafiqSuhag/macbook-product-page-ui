@@ -2,14 +2,19 @@
 // s 512 - 100 1tb-180
 // delivery 20
 
-// storage
+/*--------------------------------
+        Identifier Declaration
+ ---------------------------------*/
+
+
+// memory 
+const variationMemory8gb  = document.getElementById('variations-memory-8gb')
+const variationMemory16gb  = document.getElementById('variations-memory-16gb')
+
+ // storage
 const variationStorage256gb  = document.getElementById('variation-storage-256gb')
 const variationStorage512gb  = document.getElementById('variation-storage-512gb')
 const variationStorage1tb  = document.getElementById('variation-storage-1tb')
-
-// memory 
-const variationMemory8bg  = document.getElementById('variations-memory-8gb')
-const variationMemoryCost  = document.getElementById('variations-memory-16gb')
 
 // delivery 
 const variationFreeDelivery  = document.getElementById('variation-free-delivery')
@@ -27,7 +32,22 @@ const promoInput  = document.getElementById('promo-input')
 const promoButton  = document.getElementById('promo-button')
 
 
-// storage variation event handel
+/*--------------------------------
+        Event Handler 
+ ---------------------------------*/
+
+
+ // memory variations event handler
+variationMemory8gb.addEventListener('click',function(){
+    memoryCost.innerText = 0;
+    totalPriceCalculation();
+})
+variationMemory16gb.addEventListener('click',function(){
+    memoryCost.innerText = 100;
+    totalPriceCalculation();
+})
+
+// storage variations event handler
 variationStorage512gb.addEventListener('click',function(){
     storageCost.innerText = 100;
     totalPriceCalculation();
@@ -37,10 +57,29 @@ variationStorage1tb.addEventListener('click',function(){
     totalPriceCalculation();
 })
 
+// delivery variations event handler
+variationFreeDelivery.addEventListener('click',function(){
+    deliveryCost.innerText = 0
+    totalPriceCalculation();
+})
+
+variationExpressDelivery.addEventListener('click',function(){
+    deliveryCost.innerText = 20
+    totalPriceCalculation();
+})
+
+// promo button 
+promoButton.addEventListener('click',function(){
+    promoCodeCheck(promoInput.value);
+})
 
 
 
-/// calculation 
+
+/*--------------------------------
+        Calculation
+ ---------------------------------*/
+
 
 // subtotal calculation
 function totalPriceCalculation(){
@@ -48,6 +87,19 @@ function totalPriceCalculation(){
     let subTotal = 0;
     subTotal =basePrice + parseInt(memoryCost.innerText) +  parseInt(storageCost.innerText) +   parseInt(deliveryCost.innerText) 
     subTotalPrice.innerText = subTotal;   
+    totalPrice.innerText = subTotal;
+
 }
 
 
+function promoCodeCheck(promoCode){
+
+    if(promoCode == 'stevekaku'){
+        const totalCostAfterPromoApply = parseFloat(subTotalPrice.innerText) - (parseFloat(subTotalPrice.innerText) * 0.2)
+        totalPrice.innerText = totalCostAfterPromoApply;
+        promoInput.value = '';
+    }
+
+    
+
+}
